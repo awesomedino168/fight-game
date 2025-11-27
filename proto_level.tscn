@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://831pf33paejs"]
+
+[ext_resource type="Script" uid="uid://ba8181765k2au" path="res://player/player.gd" id="1_x0rah"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6ov36"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_m64qe"]
+
+[sub_resource type="Environment" id="Environment_x0rah"]
+
+[node name="protoLevel" type="Node3D"]
+
+[node name="floor" type="CSGBox3D" parent="."]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_x0rah")
+
+[node name="collider" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4995394, 0)
+shape = SubResource("CapsuleShape3D_6ov36")
+
+[node name="visuals" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CapsuleMesh_m64qe")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 25, 25)
+fov = 45.0
+size = 18.961
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x0rah")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710677, -0.36416572, 0.6061215, -0.68301266, -0.12990105, 0.7187623, -0.18301268, -0.92223036, -0.3405839, 0, 6.8102655, 0)
