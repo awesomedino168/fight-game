@@ -1,14 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://831pf33paejs"]
+[gd_scene load_steps=11 format=3 uid="uid://831pf33paejs"]
 
 [ext_resource type="Script" uid="uid://ba8181765k2au" path="res://Player/Player.gd" id="1_x0rah"]
 [ext_resource type="Script" uid="uid://fqv5tqqk7e53" path="res://Player/Input/InputHandler.gd" id="2_6ov36"]
+[ext_resource type="Script" uid="uid://csy4hlnn6ubth" path="res://Camera3d.gd" id="2_m64qe"]
 
-[sub_resource type="Environment" id="Environment_x0rah"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ov36"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_6ov36"]
+
+[sub_resource type="Sky" id="Sky_m64qe"]
+sky_material = SubResource("PhysicalSkyMaterial_6ov36")
+
+[sub_resource type="Environment" id="Environment_8b345"]
+background_mode = 2
+sky = SubResource("Sky_m64qe")
+volumetric_fog_albedo = Color(0.96862745, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6ov36"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0rah"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0, 0.84, 0.39200002, 1)
 metallic = 0.23
 roughness = 0.66
 grow_amount = 1.684
@@ -17,13 +28,30 @@ grow_amount = 1.684
 
 [node name="protoLevel" type="Node3D"]
 
-[node name="floor" type="CSGBox3D" parent="."]
-transform = Transform3D(0.70710665, 0, 0.70710665, 0, 1, 0, -0.70710665, 0, 0.70710665, 0, 0, 0)
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.101874, 1.0045447, -1.3562012)
+material_override = SubResource("StandardMaterial3D_6ov36")
 use_collision = true
-size = Vector3(20, 1, 20)
+size = Vector3(2.979004, 1, 3.7124023)
+
+[node name="floor" type="CSGBox3D" parent="."]
+transform = Transform3D(0.70710665, 0, 0.70710665, 0, 1, 0, -0.70710665, 0, 0.70710665, 3.9108386, 0, 0.48363268)
+use_collision = true
+size = Vector3(24.846802, 1, 26.214722)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_x0rah")
+environment = SubResource("Environment_8b345")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 25, 25)
+projection = 1
+current = true
+fov = 45.0
+size = 17.862
+near = 0.001
+far = 4033.89
+script = ExtResource("2_m64qe")
+follow_target = NodePath("../CharacterBody3D")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 script = ExtResource("1_x0rah")
@@ -33,19 +61,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4995394, 0)
 shape = SubResource("CapsuleShape3D_6ov36")
 
 [node name="visuals" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1.2785562, 0, 0, 0, 1.1785736, 0, 0, 0, 1, 0, 1.5, 0)
 material_override = SubResource("StandardMaterial3D_x0rah")
 gi_mode = 2
 mesh = SubResource("CapsuleMesh_m64qe")
 
 [node name="Input" type="Node" parent="CharacterBody3D"]
 script = ExtResource("2_6ov36")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 25, 25)
-projection = 1
-fov = 45.0
-size = 18.961
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710677, -0.36416572, 0.6061215, -0.68301266, -0.12990105, 0.7187623, -0.18301268, -0.92223036, -0.3405839, 0, 6.8102655, 0)
