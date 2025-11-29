@@ -13,10 +13,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	print(str(follow_target.global_transform.origin) + "    " + str(transform.origin))
 	if not follow_target:
 		return
-		
-	transform.origin = transform.origin.lerp(offset+follow_target.global_transform.origin, delta*follow_speed)
+
+	var t = 1.0 - exp(-follow_speed * delta)
+	
+	transform.origin = transform.origin.lerp(offset+follow_target.global_transform.origin, t)
 	pass
