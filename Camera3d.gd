@@ -8,6 +8,7 @@ extends Camera3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	make_current()
 
 	pass # Replace with function body.
 
@@ -18,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if not follow_target:
 		return
 
-	var t = 1.0 - exp(-follow_speed * delta)
 	
-	transform.origin = transform.origin.lerp(offset+follow_target.global_transform.origin, t)
+	
+	transform.origin = transform.origin.lerp(offset+follow_target.global_transform.origin, follow_speed*delta)
 	pass
