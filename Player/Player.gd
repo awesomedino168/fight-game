@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const SPEED = 10
 
-const JUMP_VELOCITY = 10
+const JUMP_VELOCITY = 5 
 
 @onready var ih = $Input as InputHandler
 

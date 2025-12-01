@@ -1,8 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://831pf33paejs"]
+[gd_scene load_steps=15 format=3 uid="uid://831pf33paejs"]
 
 [ext_resource type="Script" uid="uid://ba8181765k2au" path="res://Player/Player.gd" id="1_x0rah"]
 [ext_resource type="Script" uid="uid://fqv5tqqk7e53" path="res://Player/Input/InputHandler.gd" id="2_6ov36"]
 [ext_resource type="Script" uid="uid://csy4hlnn6ubth" path="res://Camera3d.gd" id="2_m64qe"]
+[ext_resource type="Script" uid="uid://bkmg8kebxohnc" path="res://Enemy.gd" id="4_8b345"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m64qe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b345"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_07bsh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ov36"]
 
@@ -36,7 +44,24 @@ stretch = true
 stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
 size = Vector2i(576, 324)
+render_target_update_mode = 4
+
+[node name="Enemy" type="Node3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.366424, 4.34224, 0)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="SubViewportContainer/SubViewport/Enemy" node_paths=PackedStringArray("target")]
+script = ExtResource("4_8b345")
+target = NodePath("../../CharacterBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Enemy/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0002002716, 0)
+shape = SubResource("CapsuleShape3D_m64qe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Enemy/CharacterBody3D"]
+material_override = SubResource("StandardMaterial3D_8b345")
+mesh = SubResource("CapsuleMesh_07bsh")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.101874, 1.0045447, -1.3562012)
@@ -80,5 +105,10 @@ mesh = SubResource("CapsuleMesh_m64qe")
 script = ExtResource("2_6ov36")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.7071068, -0.36416566, 0.6061216, -0.6830127, -0.12990116, 0.71876234, -0.1830127, -0.9222305, -0.34058377, 0, 6.8102655, 0)
+transform = Transform3D(0.5406834, -0.6299145, 0.55755633, -0.5706141, 0.21237497, 0.7932821, -0.61811125, -0.747064, -0.24461058, 5.609803, 5.5184813, 0)
 shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 2.243
+shadow_reverse_cull_face = true
+shadow_transmittance_bias = -2.052
+shadow_blur = 1.041

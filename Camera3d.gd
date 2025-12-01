@@ -15,7 +15,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	print(str(follow_target.global_transform.origin) + "    " + str(transform.origin))
+	#print(str(follow_target.global_transform.origin) + "    " + str(transform.origin))
 	if not follow_target:
 		return
 
