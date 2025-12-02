@@ -15,12 +15,16 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 		
 	
+		
+	
 	
 		
-	var target_vector
+	var target_vector = Vector3(target.global_transform.origin.x-global_transform.origin.x, 0, target.global_transform.origin.z - global_transform.origin.z).normalized()
 	
-	#print(str(velocity.x) + "    " + str(velocity.z))
-	print(str(target.global_transform.origin.x))
+	velocity.x = SPEED * target_vector.x
+	velocity.z = SPEED * target_vector.z
+	print(str(velocity.x) + "    " + str(velocity.z))
+	#print(str(target.global_transform.origin.x))
 	
 	
 	move_and_slide()

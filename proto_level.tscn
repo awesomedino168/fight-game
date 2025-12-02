@@ -92,7 +92,7 @@ follow_target = NodePath("../CharacterBody3D")
 script = ExtResource("1_x0rah")
 
 [node name="collider" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4995394, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 1.4995394, 0)
 shape = SubResource("CapsuleShape3D_6ov36")
 
 [node name="visuals" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/CharacterBody3D"]
